@@ -1,1 +1,48 @@
 
+getSeries:
+  name: get-series-service-${self:custom.stage}
+  handler: handler.getSeries
+  memorySize: 256
+  timeout: 5
+  environment: ${file(./env.yml):${self:custom.stage}}
+
+  events:
+    - http:
+        path: series/get/{id}
+        method: get
+
+saveSeries:
+  name: save-series-service-${self:custom.stage}
+  handler: handler.saveSeries        
+  memorySize: 256
+  timeout: 5
+  environment: ${file(./env.yml):${self:custom.stage}}
+
+  events:
+    - http:
+        path: series/create
+        method: post 
+
+updateSeries:
+  name: update-series-service-${self:custom.stage}
+  handler: handler.updateSeries        
+  memorySize: 256
+  timeout: 5
+  environment: ${file(./env.yml):${self:custom.stage}}
+
+  events:
+    - http:
+        path: series/update/{id}
+        method: put         
+
+deleteSeries:
+  name: delete-series-service-${self:custom.stage}
+  handler: handler.deleteSeries        
+  memorySize: 256
+  timeout: 5
+  environment: ${file(./env.yml):${self:custom.stage}}
+
+  events:
+    - http:
+        path: series/delete/{id}
+        method: delete        
